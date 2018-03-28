@@ -15,7 +15,7 @@ var kafka = require('kafka-node'),
     Consumer = new kafka.ConsumerStream,
     consumer = new Consumer(
       client,
-      [{topic:'recipe_A-H',partition:0},{topic:'recipe_I_P', partition:1},{topic:'recipe_Q_P'}]
+      [{topic:'recipe_A-H',partition:0},{topic:'recipe_I_P', partition:1}]
     );
 
 consumer.on('message',function(message){
@@ -25,7 +25,10 @@ consumer.on('message',function(message){
 });
 
 consumer.on('error',function(err){
-  console.console.log("Encountered error",err);
+	// we can perhaps move the message into a retry directory?!
+  console.log("Encountered error",err);
+  
+  
 });
 
 var loadMessage = function(message,callback){
